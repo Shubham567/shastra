@@ -7,6 +7,7 @@ import HeaderVisualizer from "../components/header-visualizer.js";
 import CookieVisualizer from "../components/cookies-visualizer";
 import ParamVisualizer from "../components/param-visualizer.js";
 import CurlGeneralDetails from "../components/curl-general-details.js";
+import {LightningBoltIcon} from "@heroicons/react/outline";
 
 
 export default function Home() {
@@ -71,8 +72,8 @@ export default function Home() {
                         <div className={"flex justify-end items-center gap-2"}>
                             {/*<span>Quickly create ui from curl -&gt; </span>*/}
                             {/*clear button next*/}
-                            <button className={"px-4 py-2 bg-gray-700 rounded text-white"} type={"reset"}>Clear</button>
-                            <button className={"px-4 py-2 bg-indigo-700 rounded text-white"} type={"submit"} >Generate UI</button>
+                            {/*<button className={"px-4 py-2 bg-gray-700 rounded text-white"} type={"reset"}>Clear</button>*/}
+                            <button className={"flex items-center gap-2 px-8 py-2 bg-indigo-700 rounded text-white text-lg font-semibold"} type={"submit"} >Generate UI <LightningBoltIcon className={"h-5"} /> </button>
                         </div>
                     </form>
                 </div>
@@ -113,7 +114,7 @@ export default function Home() {
                             }
                         }}
                         files={{
-                            "index.html": `<html>
+                            "index.html": `<html lang="en-US">
     <head>
         <title>Generated UI</title>
     </head>

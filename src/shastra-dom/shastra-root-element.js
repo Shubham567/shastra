@@ -4,14 +4,18 @@ function shastraRootElement(shElement){
 
     const {domString, script} = shElement;
 
-    const rootElement = shastraElement("html", {children : [
-        shastraElement("head", {children: [
-            shastraElement("title", {children: [
+    const rootElement = shastraElement("html", {},
+        shastraElement("head", {},
+            shastraElement("title",{},
                 "Shastra UI",
-                ]}),
-        ]}),
-        shastraElement("body", {children: domString}),
-    ]});
+                ),
+        ),
+        shastraElement("body", {},
+            shastraElement("div", {id: "app"},
+                domString,
+            ),
+        ),
+    );
 
     return {
         "index.html": rootElement.domString,
