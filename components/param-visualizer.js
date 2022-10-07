@@ -26,7 +26,7 @@ const ParamVisualizer = memo(() => {
     return (
         <div>
             <div className={"mb-2"}>
-                <h3 className={"text-gray-700 text-lg font-medium"}>
+                <h3 className={"text-gray-700 text-lg font-bold"}>
                     Query Params
                 </h3>
             </div>

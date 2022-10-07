@@ -2,10 +2,14 @@ import React, {memo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import EntityVisualizer from "./entity-visualizer.js";
 import {changeCurlHeaders} from "../store/slices/curlSlice.js";
+import {ChevronDownIcon} from "@heroicons/react/outline";
+import clsx from "clsx";
 
 const HeaderVisualizer = memo(() => {
     const headers = useSelector(state => state.curlData.curlJson.headers) || {};
     const keys = Object.keys(headers);
+
+    const [expanded,setExpanded] = React.useState(false);
 
     const dispatch = useDispatch();
 
@@ -26,11 +30,18 @@ const HeaderVisualizer = memo(() => {
     if(!keys.length) return null;
     return (
         <div>
-            <div className={"mb-2"}>
-                <h3 className={"text-gray-700 text-lg font-medium"}>
-                    Headers
-                </h3>
+            <button className={"w-full focus:outline-none active:outline-none"} onClick={() => setExpanded(!expanded)}>
+                <div className={"flex justify-between my-2"}>
+                    <h3 className={"text-gray-700 text-lg font-bold"}>
+                        Headers
+                    </h3>
+                    <div className={"flex items-center"}>
+                        <span className={"sr-only"}>Collapse</span>
+                        <ChevronDownIcon className={clsx("h-5 w-5 text-gray-400 transition", {"-rotate-180": expanded})} />
+                    </div>
             </div>
+            </button>
+            <div className={clsx("transition duration-500", {"h-0 overflow-hidden" : !expanded, "h-full" : expanded})}>
             {
                 keys.map(key => {
                     if (key === "Cookie") {
@@ -46,6 +57,7 @@ const HeaderVisualizer = memo(() => {
                     )
                 })
             }
+            </div>
         </div>
     );
 });

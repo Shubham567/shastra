@@ -6,6 +6,7 @@ import axios from "axios";
 import HeaderVisualizer from "../components/header-visualizer.js";
 import CookieVisualizer from "../components/cookies-visualizer";
 import ParamVisualizer from "../components/param-visualizer.js";
+import CurlGeneralDetails from "../components/curl-general-details.js";
 
 
 export default function Home() {
@@ -77,7 +78,7 @@ export default function Home() {
                 </div>
                 <div className={"mt-4"}>
                     <div>
-                        <h2 className={"mb-2 text-xl font-bold text-gray-700"}>Visualize</h2>
+                        <h2 className={"mb-2 text-xl font-bold text-gray-700"}>Visualize and Select Input fields</h2>
                     </div>
                     <div>
                         {
@@ -87,10 +88,13 @@ export default function Home() {
                                     <span className="block sm:inline">Invalid curl command</span>
                                 </div>
                                 :
-                                <div>
-                                    <HeaderVisualizer />
-                                    <CookieVisualizer />
-                                    <ParamVisualizer />
+                                <div className={"p-2"}>
+                                    <div className={"flex flex-col gap-2"}>
+                                        <CurlGeneralDetails />
+                                        <ParamVisualizer />
+                                        <HeaderVisualizer />
+                                        <CookieVisualizer />
+                                    </div>
                                 </div>
                         }
                     </div>
