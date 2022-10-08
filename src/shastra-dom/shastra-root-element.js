@@ -4,7 +4,7 @@ function shastraRootElement(shElement){
 
     const {domString, script} = shElement();
 
-    const rootElement = s("html", {},
+    const rootElement = s("html", {lang: "en"},
         s("head", {},
             s("title",{},
                 "Shastra UI",
