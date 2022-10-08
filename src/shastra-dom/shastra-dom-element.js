@@ -14,10 +14,10 @@ const shastraDomElement = (tagName,{...props},...children) => {
         return `${kebabCaseKey}="${props[key]}"`;
     }).join(' ');
 
-    return (
-`<${tagName} ${attributeString}>
-    ${typeof children === "string" ? children : children.join('\n')}
-</${tagName}>`
+    return ( (tabCount) => {
+            return `<${tagName}${attributeString && attributeString.length ? " "+attributeString:""}>${!children.length ? `</${tagName}>` : ""}${children.length ? `\n${"    ".repeat(tabCount)}${typeof children === "string" ? children : children.join(`\n${"    ".repeat(tabCount)}`)}
+${"    ".repeat(tabCount - 1 < 0 ? 0 : tabCount - 1)}</${tagName}>` : ""}`
+        }
     );
 };
 

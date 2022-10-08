@@ -1,24 +1,32 @@
-import shastraElement from "./shastra-element.js";
+import s from "./s";
 
 function shastraRootElement(shElement){
 
-    const {domString, script} = shElement;
+    const {domString, script} = shElement();
 
-    const rootElement = shastraElement("html", {},
-        shastraElement("head", {},
-            shastraElement("title",{},
+    const rootElement = s("html", {},
+        s("head", {},
+            s("title",{},
                 "Shastra UI",
                 ),
+            s("meta", {charset: "utf-8"}),
+            s("meta", {name: "viewport", content: "width=device-width, initial-scale=1"}),
+            s("script", {src: "https://cdn.tailwindcss.com"}),
         ),
-        shastraElement("body", {},
-            shastraElement("div", {id: "app"},
+        s("body", {},
+            s("div", {id: "app"},
                 domString,
             ),
         ),
     );
 
     return {
-        "index.html": rootElement.domString,
+        "index.html": "<!doctype html>\n"+rootElement().domString,
+        "index.js": "",
+        // "src/index.js": {
+        //     code : "",
+        //     hidden: true,
+        // },
     }
 }
 

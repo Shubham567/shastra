@@ -8,6 +8,8 @@ import CookieVisualizer from "../components/cookies-visualizer";
 import ParamVisualizer from "../components/param-visualizer.js";
 import CurlGeneralDetails from "../components/curl-general-details.js";
 import {LightningBoltIcon} from "@heroicons/react/outline";
+import shastraRootElement from "../src/shastra-dom/shastra-root-element.js";
+import formPage from "../src/shastra-ui/form-page.js";
 
 
 export default function Home() {
@@ -105,27 +107,21 @@ export default function Home() {
                         <h2 className={"text-xl font-bold text-gray-700"}>Preview and Edit</h2>
                     </div>
                     <Sandpack
-                        theme={"dark"}
+                        theme={"light"}
                         template={"vanilla"}
-                        entry={"/index.html"}
-                        customSetup={{
-                            dependencies: {
+                        options={{
+                            activeFile: "index.html",
+                            autorun: true,
+                            // closableTabs: true,
+                            // showConsole: true,
+                            externalResources: ["https://cdn.tailwindcss.com", "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css"],
+                        }}
 
-                            }
+                        customSetup={{
+                            environment: "static",
+                            entry: "/index.html"
                         }}
-                        files={{
-                            "index.html": `<html lang="en-US">
-    <head>
-        <title>Generated UI</title>
-    </head>
-    <body>
-        <h1>Generated UI</h1>
-        <div id="app"></div>
-    </body>
-</html>`,
-                            "index.js": `const app = document.getElementById("app");
-app.innerHTML = "<h1>Hello World</h1>";`
-                        }}
+                        files={shastraRootElement(formPage())}
                     />;
                 </div>
             </div>
