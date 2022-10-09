@@ -1,4 +1,10 @@
-import {Sandpack} from "@codesandbox/sandpack-react";
+import {
+    Sandpack,
+    SandpackCodeEditor,
+    SandpackLayout,
+    SandpackPreview,
+    SandpackProvider
+} from "@codesandbox/sandpack-react";
 import {useDispatch, useSelector} from "react-redux";
 import {changeConversionError, changeCurlJs, changeCurlJson, changeCurlText} from "../store/slices/curlSlice";
 import {useEffect} from "react";
@@ -10,6 +16,7 @@ import CurlGeneralDetails from "../components/curl-general-details.js";
 import {LightningBoltIcon} from "@heroicons/react/outline";
 import shastraRootElement from "../src/shastra-dom/shastra-root-element.js";
 import formPage from "../src/shastra-ui/form-page.js";
+import ShastraUiSandpack from "../components/shastra-ui-sandpack.js";
 
 
 export default function Home() {
@@ -102,28 +109,7 @@ export default function Home() {
                         }
                     </div>
                 </div>
-                <div className={"mt-2 h-96"}>
-                    <div>
-                        <h2 className={"text-xl font-bold text-gray-700"}>Preview and Edit</h2>
-                    </div>
-                    <Sandpack
-                        theme={"light"}
-                        template={"vanilla"}
-                        options={{
-                            activeFile: "index.html",
-                            autorun: true,
-                            // closableTabs: true,
-                            // showConsole: true,
-                            externalResources: ["https://cdn.tailwindcss.com", "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css"],
-                        }}
-
-                        customSetup={{
-                            environment: "static",
-                            entry: "/index.html"
-                        }}
-                        files={shastraRootElement(formPage())}
-                    />;
-                </div>
+                <ShastraUiSandpack />
             </div>
         </div>
     )
