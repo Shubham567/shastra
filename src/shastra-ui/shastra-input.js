@@ -15,9 +15,9 @@ const placeHolders = {
 }
 
 
-const shastraInput  = (name, {label,row,type,required,className = "", ...props}, ...children) => {
+const shastraInput  = (name, {label,rows,type = "text",required,className = "", ...props}, ...children) => {
     let tagName = "input";
-    if(row && row > 1 && type === "text"){
+    if(rows && rows > 1 && type === "text"){
         tagName = "textarea";
     }
 
@@ -29,7 +29,7 @@ const shastraInput  = (name, {label,row,type,required,className = "", ...props},
         className: "bg-gray-50 rounded-md p-2 flex flex-col gap-1 w-full",
         },
         s("div", {className: "flex justify-between px-1"},
-            s("label", {className: "block text-sm font-medium text-indigo-600", htmlFor: name, id: `label-${name}`}, label),
+            s("label", {className: "block text-sm font-medium text-indigo-600 capitalize", htmlFor: name, id: `label-${name}`}, label),
             s("span", {className: clsx({"text-red-500 text-sm": required, "text-sm text-gray-400" : !required})}, required ? "*" : "Optional"),
         ),
         s("div", {className: "mt-1"},
@@ -40,9 +40,11 @@ const shastraInput  = (name, {label,row,type,required,className = "", ...props},
                     type,
                     id: name,
                     placeholder: placeHolders[type],
+                    rows,
                     className: `p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-transparent focus:outline-indigo-500 sm:text-sm resize-none bg-white text-gray-700 ${className}`,
                     ...props
-                }
+                },
+                tagName === "textarea" ? props.value : ""
             )
         )
     )

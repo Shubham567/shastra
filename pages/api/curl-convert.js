@@ -9,14 +9,15 @@ export default function handler(req, res) {
 
         const curlJs = curlConverter.toJavaScript(curl);
         const curlObject = JSON.parse(curlConverter.toJsonString(curl));
-        const contentTypeHeader = curlObject.headers.find(header => header.name.toLowerCase() === "content-type");
+        const contentTypeHeader = Object.keys(curlObject.headers).find(header => header.toLowerCase() === "content-type");
         if(curlObject.headers[contentTypeHeader] === "application/json" || curlObject.headers[contentTypeHeader] === "application/ld+json"){
             try{
                 curlObject.data = JSON.parse(Object.keys(curlObject.data)?.[0]);
+                curlObject.isValidJsonBody = true;
             }
             catch (e) {
                 console.log("Error parsing body");
-                curlObject.message = "Not a valid JSON in body";
+                curlObject.conversionError = "Not a valid JSON in body";
             }
         }
         console.log("Converted curl to json");

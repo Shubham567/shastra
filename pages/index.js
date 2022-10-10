@@ -7,7 +7,7 @@ import {
 } from "@codesandbox/sandpack-react";
 import {useDispatch, useSelector} from "react-redux";
 import {changeConversionError, changeCurlJs, changeCurlJson, changeCurlText} from "../store/slices/curlSlice";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import HeaderVisualizer from "../components/header-visualizer.js";
 import CookieVisualizer from "../components/cookies-visualizer";
@@ -25,6 +25,8 @@ export default function Home() {
     const curlJson = useSelector(state => state.curlData.curlJson);
     const curlJs = useSelector(state => state.curlData.curlJs);
     const conversionError = useSelector(state => state.curlData.conversionError);
+
+    const [loaded, setLoaded] = useState(false);
 
     console.log({curlText, curlJson, curlJs, conversionError});
 
@@ -49,9 +51,11 @@ export default function Home() {
                     const {json, js} = res.data;
                     handleCurlConvert(json, js);
                     changeConversionError(null);
+                    setLoaded(true);
                 }
                 catch (e) {
                     dispatch(changeConversionError(e.message));
+                    setLoaded(false);
                 }
             })()
         }
@@ -85,31 +89,39 @@ export default function Home() {
                             <button className={"flex items-center gap-2 px-8 py-2 bg-indigo-700 rounded text-white text-lg font-semibold"} type={"submit"} >Generate UI <LightningBoltIcon className={"h-5"} /> </button>
                         </div>
                     </form>
+                    {
+                        conversionError &&
+                        <div
+                            className={"bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"}
+                            role="alert">
+                            <strong className="font-bold">Error!</strong>
+                            <span className="block sm:inline">Invalid curl command</span>
+                        </div>
+                    }
                 </div>
-                <div className={"mt-4"}>
-                    <div>
-                        <h2 className={"mb-2 text-xl font-bold text-gray-700"}>Visualize and Select Input fields</h2>
-                    </div>
-                    <div>
-                        {
-                            conversionError ?
-                                <div className={"bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"} role="alert">
-                                    <strong className="font-bold">Error!</strong>
-                                    <span className="block sm:inline">Invalid curl command</span>
-                                </div>
-                                :
-                                <div className={"p-2"}>
-                                    <div className={"flex flex-col gap-2"}>
-                                        <CurlGeneralDetails />
-                                        <ParamVisualizer />
-                                        <HeaderVisualizer />
-                                        <CookieVisualizer />
-                                    </div>
-                                </div>
-                        }
-                    </div>
-                </div>
-                <ShastraUiSandpack />
+                {
+                    !conversionError && loaded &&
+                    <div className={"mt-4"}>
+                        <div>
+                            <div>
+                                <h2 className={"mb-2 text-xl font-bold text-gray-700"}>Visualize and Select Input
+                                    fields</h2>
+                            </div>
+                            <div>
+                                {
+                                        <div className={"p-2"}>
+                                            <div className={"flex flex-col gap-2"}>
+                                                <CurlGeneralDetails/>
+                                                <ParamVisualizer/>
+                                                <HeaderVisualizer/>
+                                                <CookieVisualizer/>
+                                            </div>
+                                        </div>
+                                }
+                            </div>
+                        </div>
+                        <ShastraUiSandpack/>
+                    </div>}
             </div>
         </div>
     )

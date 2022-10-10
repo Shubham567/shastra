@@ -3,6 +3,7 @@ const shastraDomElement = (tagName,{...props},...children) => {
     // tagName: string
     // props: object
     // children: array
+    children = children.filter(child => child !== null);
     const attributeString = Object.keys(props).map((key) => {
         if (key === "className") {
             return `class="${props[key]}"`;

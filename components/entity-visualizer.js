@@ -25,12 +25,12 @@ const EntityVisualizer = ({entityName, entityValue, handleEntityChange, handleEn
         <div className={""}>
             <div className={"grid grid-cols-12"}>
                 <div className={"col-span-3 flex items-center"}>
-                    <div>
-                        <label className={"sr-only"}>
-                            Show entity in UI
-                        </label>
-                        <input type={"checkbox"} className={""} onChange={handleItemSelect} checked={selectedFields.find(f => f.data_id === data_id)} />
-                    </div>
+                    {/*<div>*/}
+                    {/*    <label className={"sr-only"}>*/}
+                    {/*        Show entity in UI*/}
+                    {/*    </label>*/}
+                    {/*    <input type={"checkbox"} className={""} onChange={handleItemSelect} checked={selectedFields.find(f => f.data_id === data_id)} />*/}
+                    {/*</div>*/}
                     <textarea
                         rows={1}
                         className={"flex-1 m-1 px-1 pt-1 pb-2 resize-none focus:outline focus:outline-1 outline-gray-400 w-full rounded overflow-y-auto disabled:bg-none"}
@@ -41,21 +41,22 @@ const EntityVisualizer = ({entityName, entityValue, handleEntityChange, handleEn
                 <div className={"col-span-8"}>
                     <textarea
                         name={entityName}
-                        placeholder={"enter value"}
+                        placeholder={"Enter value"}
                         // cols="50"
                         rows="1"
+                        // readOnly
                         className={"w-full p-2 resize-none focus:outline focus:outline-1 outline-gray-400 w-full rounded overflow-y-auto"}
                         value={entityValue}
                         onChange={handleEntityChange}
                     />
                 </div>
-                <div className={"col-span-1"}>
-                    <div className={"w-full flex justify-end"}>
-                        <button onClick={handleDelete}>
-                            <TrashIcon className={"h-5 w-5 text-gray-400"} />
-                        </button>
-                    </div>
-                </div>
+                {/*<div className={"col-span-1"}>*/}
+                {/*    <div className={"w-full flex justify-end"}>*/}
+                {/*        <button onClick={handleDelete}>*/}
+                {/*            <TrashIcon className={"h-5 w-5 text-gray-400"} />*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         </div>
     );

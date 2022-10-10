@@ -10,6 +10,7 @@ import {
 import shastraRootElement from "../src/shastra-dom/shastra-root-element.js";
 import formPage from "../src/shastra-ui/form-page.js";
 import clsx from "clsx";
+import {useSelector} from "react-redux";
 
 const height = 500;
 const consoleHeight = 200;
@@ -25,6 +26,9 @@ const CommandLineIcon = () => {
 const ShastraUiSandpack = props => {
     const [advancedView, setAdvancedView] = React.useState(false);
     const [showConsole, setShowConsole] = React.useState(false);
+
+    const dataJson = useSelector(state => state.curlData.curlJson);
+
     return (
         <div className={"mt-2"} >
             <div className={"flex justify-between items-center"}>
@@ -59,7 +63,7 @@ const ShastraUiSandpack = props => {
                         environment: "parcel",
                         entry: "index.html",
                     }}
-                    files={shastraRootElement(formPage())}
+                    files={shastraRootElement(formPage({...dataJson}))}
                 >
                     <SandpackLayout style={{height}}>
                         { advancedView && <SandpackCodeEditor style={{height}}/>}
