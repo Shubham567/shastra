@@ -2,8 +2,10 @@ const shastraScript = (options = {}) => {
     const scripts = {
         "index.js" : `window.shastraOptions = ${JSON.stringify(options, null, 2)};
 
+console.log("Welcome to Shastra Ui");
+
 function shastraSubmitForm(e) {
-    console.log("Form Submitted");
+    console.log("Form Submit Initiated");
     e.preventDefault();
     const form = e.target;
 }
@@ -11,10 +13,7 @@ function shastraSubmitForm(e) {
 const form = document.getElementById("shastra-form");
 form.addEventListener("submit", shastraSubmitForm);
     
-        `,
-        "hello.js" : `console.clear();
-console.log("Hello World");
-`
+        `
     }
 
     return {...scripts};

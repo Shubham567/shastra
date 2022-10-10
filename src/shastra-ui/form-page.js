@@ -19,7 +19,7 @@ const formPage = ({...attributes},pageTitle = "Shastra", pageDescription = "Gene
         Object.keys(body).forEach(key => bodyFormItems.push(shastraInput(key,{
                     name: key,
                     value: body[key],
-                    row: Math.ceil((queries[key]?.length || 0) / 50),
+                    row: Math.ceil((queries[key]?.length || 0) / 60),
                     required : true
                 }
             ))
@@ -32,7 +32,7 @@ const formPage = ({...attributes},pageTitle = "Shastra", pageDescription = "Gene
         queryKeys.forEach(key => queryFormItems.push(shastraInput(key,{
                 type: "text",
                 value: queries[key],
-                rows: Math.ceil((queries[key]?.length || 0) / 50),
+                rows: Math.ceil((queries[key]?.length || 0) / 60),
                 required : true
             }
         )));

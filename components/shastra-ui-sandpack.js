@@ -63,7 +63,9 @@ const ShastraUiSandpack = props => {
                         environment: "parcel",
                         entry: "index.html",
                     }}
-                    files={shastraRootElement(formPage({...dataJson}))}
+                    files={shastraRootElement(formPage({...dataJson}), {
+                        curlData : dataJson
+                    })}
                 >
                     <SandpackLayout style={{height}}>
                         { advancedView && <SandpackCodeEditor style={{height}}/>}
