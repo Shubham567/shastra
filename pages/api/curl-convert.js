@@ -8,9 +8,18 @@ export default function handler(req, res) {
         console.assert(curl, "curl is null");
 
         const curlJs = curlConverter.toJavaScript(curl);
-        console.log(curlJs);
         const curlObject = JSON.parse(curlConverter.toJsonString(curl));
-        console.log(curlObject);
+        const contentTypeHeader = curlObject.headers.find(header => header.name.toLowerCase() === "content-type");
+        if(curlObject.headers[contentTypeHeader] === "application/json" || curlObject.headers[contentTypeHeader] === "application/ld+json"){
+            try{
+                curlObject.data = JSON.parse(Object.keys(curlObject.data)?.[0]);
+            }
+            catch (e) {
+                console.log("Error parsing body");
+                curlObject.message = "Not a valid JSON in body";
+            }
+        }
+        console.log("Converted curl to json");
         res.status(200).json({json: curlObject, js: curlJs});
     }
     catch (e) {
