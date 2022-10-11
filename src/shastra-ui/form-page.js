@@ -63,7 +63,7 @@ const formPage = ({...attributes},useCurlValues = false,pageTitle = "Shastra", p
                     // !totalItems.length && s("div", {className: "flex justify-center text-gray-400 text-sm"}, "No input fields"),
                     s("div", {className: "flex justify-between gap-2"},
                         !!totalItems.length ? shastraButton("button",{type: "reset", className: "flex-1 font-normal", id:"shastra-reset-btn", color: "secondary"}, "Clear") : "",
-                        shastraButton("button",{ type: "Make Request", className: "flex-1" , id: "shastra-submit-btn" }, "Make Request"),
+                        shastraButton("button",{ type: "submit", className: "flex-1" , id: "shastra-submit-btn" }, "Make Request"),
                     )
                 )
             ),

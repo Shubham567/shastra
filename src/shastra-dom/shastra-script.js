@@ -64,7 +64,10 @@ function shastraSubmitForm(e) {
 
 const form = document.getElementById("shastra-form");
 form.addEventListener("submit", shastraSubmitForm);
-        `
+`,
+        "show.js" : `
+
+`
     }
 
     return {...scripts};

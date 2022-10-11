@@ -17,7 +17,18 @@ const placeHolders = {
 }
 
 
-const shastraInput  = (name, {label,rows,type = "text",required,value,className = "", ...props}, ...children) => {
+const shastraInput  = (name,
+                       {
+                           label,
+                           rows,
+                           type = "text",
+                           required,
+                           value,
+                           useCurlValues,
+                           className = ""
+                           , ...props
+                       },
+                       ...children) => {
     let tagName = "input";
     if(rows && rows > 1 && type === "text"){
         tagName = "textarea";
@@ -45,7 +56,7 @@ const shastraInput  = (name, {label,rows,type = "text",required,value,className 
                     id: name,
                     placeholder: placeHolders[derivedType],
                     rows,
-                    value : props.useCurlValues ? value : "",
+                    value : useCurlValues ? value : "",
                     className: `p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-transparent focus:outline-indigo-500 sm:text-sm resize-none bg-white text-gray-700 ${className}`,
                     ...props
                 },
