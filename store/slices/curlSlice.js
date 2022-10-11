@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {v5 as uuidV5, v4 as uuidV4} from "uuid";
 
 const initialState = {
-    curlText: "",
+    curlText: "curl 'https://reqres.in/api/users?page=2&q2=shubham%40newron.ai&color=%230018c1' --compressed",
     curlJson : {},
     curlJs: "",
     conversionError: null,
