@@ -19,6 +19,8 @@ import formPage from "../src/shastra-ui/form-page.js";
 import ShastraUiSandpack from "../components/shastra-ui-sandpack.js";
 import DataVisualizer from "../components/data-visualizer.js";
 import Head from "next/head.js";
+import dynamic from "next/dynamic.js";
+const FunHeader = dynamic(() => import( "../components/fun-header.js"), {ssr: false});
 
 
 export default function Home() {
@@ -74,6 +76,7 @@ export default function Home() {
             </Head>
             <div className={"p-4 max-w-6xl w-full"}>
                 <div>
+                    <FunHeader />
                     <form onSubmit={handleGenerate}>
                         <div className={"w-full mb-2"}>
                             <h1 className={"text-2xl text-gray-700 font-bold"}>
