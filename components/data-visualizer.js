@@ -27,7 +27,7 @@ const DataVisualizer = memo(() => {
         <div>
             <div className={"mb-2"}>
                 <h3 className={"text-gray-700 text-lg font-bold"}>
-                    Query Params
+                    Request Body
                 </h3>
             </div>
             {

@@ -27,16 +27,24 @@ const ShastraUiSandpack = props => {
     const [advancedView, setAdvancedView] = React.useState(false);
     const [showConsole, setShowConsole] = React.useState(false);
 
+    const [useCurlValues, setUseCurlValues] = React.useState(false);
+
     const dataJson = useSelector(state => state.curlData.curlJson);
 
     return (
         <div className={"mt-2"} >
             <div className={"flex justify-between items-center"}>
                 <h2 className={"text-xl font-bold text-gray-700"}>Preview and Edit</h2>
-                <fieldset className={"flex gap-1"}>
-                    <input id={"show-code"} name={"show-code"} defaultChecked={advancedView} onChange={(e) => setAdvancedView(e.target.checked)} type={"checkbox"} />
-                    <label htmlFor={"show-code"} className={"text-gray-500 text-sm"}>Show generated code</label>
-                </fieldset>
+                <div className={"flex gap-2"}>
+                    <fieldset className={"flex gap-1"}>
+                        <input id={"curl-value-control"} name={"show-code"} defaultChecked={useCurlValues} onChange={(e) => setUseCurlValues(e.target.checked)} type={"checkbox"} />
+                        <label htmlFor={"curl-value-control"} className={"text-gray-500 text-sm"}>Use values from curl as default</label>
+                    </fieldset>
+                    <fieldset className={"flex gap-1"}>
+                        <input id={"show-code"} name={"show-code"} defaultChecked={advancedView} onChange={(e) => setAdvancedView(e.target.checked)} type={"checkbox"} />
+                        <label htmlFor={"show-code"} className={"text-gray-500 text-sm"}>Show generated code</label>
+                    </fieldset>
+                </div>
             </div>
             <div style={{height}}>
                 <SandpackProvider
@@ -63,7 +71,7 @@ const ShastraUiSandpack = props => {
                         environment: "parcel",
                         entry: "index.html",
                     }}
-                    files={shastraRootElement(formPage({...dataJson}), {
+                    files={shastraRootElement(formPage({...dataJson}, useCurlValues), {
                         curlData : dataJson
                     })}
                 >

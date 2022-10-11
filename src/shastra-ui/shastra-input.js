@@ -43,9 +43,9 @@ const shastraInput  = (name, {label,rows,type = "text",required,value,className 
                     name,
                     type : derivedType,
                     id: name,
-                    placeholder: derivedType[type],
+                    placeholder: placeHolders[derivedType],
                     rows,
-                    value,
+                    value : props.useCurlValues ? value : "",
                     className: `p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-transparent focus:outline-indigo-500 sm:text-sm resize-none bg-white text-gray-700 ${className}`,
                     ...props
                 },

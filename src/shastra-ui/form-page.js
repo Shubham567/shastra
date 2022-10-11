@@ -3,7 +3,7 @@ import shastraButton from "./shastra-button.js";
 import shastraInput from "./shastra-input.js";
 import {data} from "autoprefixer";
 
-const formPage = ({...attributes},pageTitle = "Shastra", pageDescription = "Generated UI from Curl") => {
+const formPage = ({...attributes},useCurlValues = false,pageTitle = "Shastra", pageDescription = "Generated UI from Curl") => {
 
     const {
         queries = {},
@@ -20,7 +20,8 @@ const formPage = ({...attributes},pageTitle = "Shastra", pageDescription = "Gene
                     name: key,
                     value: body[key],
                     row: Math.ceil((queries[key]?.length || 0) / 60),
-                    required : true
+                    required : true,
+                    useCurlValues
                 }
             ))
         );
@@ -33,7 +34,8 @@ const formPage = ({...attributes},pageTitle = "Shastra", pageDescription = "Gene
                 type: "text",
                 value: queries[key],
                 rows: Math.ceil((queries[key]?.length || 0) / 60),
-                required : true
+                required : true,
+                useCurlValues
             }
         )));
     }

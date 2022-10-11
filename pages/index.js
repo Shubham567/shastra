@@ -17,6 +17,7 @@ import {LightningBoltIcon} from "@heroicons/react/outline";
 import shastraRootElement from "../src/shastra-dom/shastra-root-element.js";
 import formPage from "../src/shastra-ui/form-page.js";
 import ShastraUiSandpack from "../components/shastra-ui-sandpack.js";
+import DataVisualizer from "../components/data-visualizer.js";
 
 
 export default function Home() {
@@ -47,6 +48,7 @@ export default function Home() {
         if (curlText) {
             (async () => {
                 try {
+                    dispatch(changeConversionError(null));
                     const res = await axios.post("/api/curl-convert", {curl: curlText})
                     const {json, js} = res.data;
                     handleCurlConvert(json, js);
@@ -61,9 +63,6 @@ export default function Home() {
         }
     }
 
-    useEffect(() => {
-
-    }, [])
 
 
     return (
@@ -113,6 +112,7 @@ export default function Home() {
                                             <div className={"flex flex-col gap-2"}>
                                                 <CurlGeneralDetails/>
                                                 <ParamVisualizer/>
+                                                <DataVisualizer />
                                                 <HeaderVisualizer/>
                                                 <CookieVisualizer/>
                                             </div>
