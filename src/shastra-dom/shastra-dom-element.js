@@ -1,17 +1,13 @@
 const shastraDomElement = (tagName,{...props},...children) => {
     // General Element to be used for creating DOM elements
-    // tagName: string
-    // props: object
-    // children: array
+
     children = children.filter(child => child !== null);
-    console.log(props);
     const filteredProps = {};
     Object.keys(props).forEach(key => !!props[key] ? filteredProps[key] = props[key] : null);
     const attributeString = Object.keys(props).map((key) => {
         if (key === "className") {
             return `class="${props[key]}"`;
         }
-        // convert camelCase to kebab-case
         const lowerCaseKey = key.toLowerCase();
         return `${lowerCaseKey}="${props[key]}"`;
     }).join(' ');
@@ -23,6 +19,7 @@ const shastraDomElement = (tagName,{...props},...children) => {
 ${"    ".repeat(tabCount - 1 < 0 ? 0 : tabCount - 1)}</${tagName}>` : ""}`
         }
     );
+    //    pew! pew! pew pew pew
 };
 
 export default shastraDomElement;
