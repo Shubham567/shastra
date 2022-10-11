@@ -36,6 +36,14 @@ function shastraSubmitForm(e) {
         }
     }
     
+    const submitBtn = document.getElementById("shastra-submit-btn");
+    submitBtn.disabled = true;
+    const submitBtnText = submitBtn.innerText;
+    submitBtn.innerHTML = "Sending...";
+    
+    const clearBtn = document.getElementById("shastra-reset-btn");
+    clearBtn.disabled = true;
+    
     axios.request({
         url : window.shastraOptions.curlData.url,
         method : window.shastraOptions.curlData.method,
@@ -45,14 +53,17 @@ function shastraSubmitForm(e) {
         // withCredentials: true
     }).then(res => {
         console.log(res);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtnText;
     }).catch(err => {
         console.log(err);
+        submitBtn.disabled = false;
+        clearBtn.disabled = false;
     })
 }
 
 const form = document.getElementById("shastra-form");
 form.addEventListener("submit", shastraSubmitForm);
-    
         `
     }
 

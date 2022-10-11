@@ -1,5 +1,6 @@
 import s from "../shastra-dom/s.js";
 import clsx from "clsx";
+import detectTextFields from "../detect-text-fields.js";
 
 const placeHolders = {
     tel : "+91 1234567890",
@@ -11,11 +12,12 @@ const placeHolders = {
     time : "Enter time here",
     url : "http://www.example.com",
     search : "Enter search text here",
+    color : "#000000",
     file : null,
 }
 
 
-const shastraInput  = (name, {label,rows,type = "text",required,className = "", ...props}, ...children) => {
+const shastraInput  = (name, {label,rows,type = "text",required,value,className = "", ...props}, ...children) => {
     let tagName = "input";
     if(rows && rows > 1 && type === "text"){
         tagName = "textarea";
@@ -24,6 +26,8 @@ const shastraInput  = (name, {label,rows,type = "text",required,className = "", 
     if(!label){
         label = name;
     }
+
+    const derivedType = detectTextFields(value);
 
     return s("div", {
         className: "bg-gray-50 rounded-md p-2 flex flex-col gap-1 w-full",
@@ -37,10 +41,11 @@ const shastraInput  = (name, {label,rows,type = "text",required,className = "", 
                 tagName,
                 {
                     name,
-                    type,
+                    type : derivedType,
                     id: name,
-                    placeholder: placeHolders[type],
+                    placeholder: derivedType[type],
                     rows,
+                    value,
                     className: `p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-transparent focus:outline-indigo-500 sm:text-sm resize-none bg-white text-gray-700 ${className}`,
                     ...props
                 },
