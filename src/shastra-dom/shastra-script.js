@@ -10,21 +10,40 @@ function shastraSubmitForm(e) {
     console.log("Form Submit Initiated");
     e.preventDefault();
     const form = e.target;
-     
-    const filteredHeader = Object.keys(window.shastraOptions.curlData.headers).filter(key => safeHeaders.includes(key.toLowerCase()));
+    
+    const body = {};
+    const query = {};
+    const formData = new FormData(form);
+    
+    const filteredHeader = Object.keys(window.shastraOptions.curlData.headers || {}).filter(key => safeHeaders.includes(key.toLowerCase()));
     const headers = {};
     filteredHeader.forEach(key => {
         headers[key] = window.shastraOptions.curlData.headers[key];
     });
     
+    
+    for (const field of form.elements) {
+        if (Object.keys(window.shastraOptions.curlData.queries || {}).includes(field.name)) {
+            query[field.name] = field.value;
+        }
+        else if (Object.keys(window.shastraOptions.curlData.data || {}).includes(field.name)) {
+            if(window.shastraOptions.curlData.isValidJsonBody){
+                body[field.name] = field.value;
+            }
+            else{
+                formData.append(field.name, field.value);
+            }
+        }
+    }
+    
     axios.request({
         url : window.shastraOptions.curlData.url,
         method : window.shastraOptions.curlData.method,
-        query : window.shastraOptions.curlData.query,
         headers : headers,
-        data : window.shastraOptions.curlData.data,
-        withCredentials: true
-}).then(res => {
+        params : {...(window.shastraOptions.curlData.query || {}), ...query},
+        data : window.shastraOptions.curlData.isValidJsonBody ? body : formData,
+        // withCredentials: true
+    }).then(res => {
         console.log(res);
     }).catch(err => {
         console.log(err);
