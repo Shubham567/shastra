@@ -18,6 +18,7 @@ import shastraRootElement from "../src/shastra-dom/shastra-root-element.js";
 import formPage from "../src/shastra-ui/form-page.js";
 import ShastraUiSandpack from "../components/shastra-ui-sandpack.js";
 import DataVisualizer from "../components/data-visualizer.js";
+import Head from "next/head.js";
 
 
 export default function Home() {
@@ -67,6 +68,10 @@ export default function Home() {
 
     return (
         <div className={"flex justify-center w-full"}>
+            <Head>
+                <title>Shastra v0.1 - Curl to HTML generator</title>
+                <meta name="description" content="Convert curl to HTML form"/>
+            </Head>
             <div className={"p-4 max-w-6xl w-full"}>
                 <div>
                     <form onSubmit={handleGenerate}>
