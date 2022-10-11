@@ -6,5 +6,6 @@ import formPage from "../../src/shastra-ui/form-page.js";
 
 export default function handler(req, res) {
 
+
   res.status(200).json(shastraRootElement(formPage()));
 }
